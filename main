@@ -1,0 +1,107 @@
+import random
+import time
+import pygame
+import math
+pygame.init()
+
+screen = pygame.display.set_mode((600, 600))
+background_colour = (255,255,255)
+screen.fill(background_colour)
+pygame.display.flip()
+
+def Print_Lage_Text(text, position):
+    font = pygame.font.SysFont("Times", 20, True, False)
+    surface = font.render(text, True, (0,0,0))
+    screen.blit(surface, position)
+
+def Convert_Degrees(R, theta):
+    y = math.cos(2 * math.pi * theta / 360) * R
+    x = math.sin(2 * math.pi * theta / 360) * R
+    return x + 300 - 20, -(y - 300) - 15
+
+
+def Print_Cost(text, position):
+    font = pygame.font.SysFont("Times", 22, True, False)
+    surface = font.render(text, True, (0,0,0))
+    screen.blit(surface, position)
+
+# default time
+default_time = 16
+# price time
+current_price = default_time
+theta = current_price
+# prediction time
+theta2 = random.randint(0, 360)
+new_location = theta2
+
+move_clock = True
+
+running = True
+while running:
+    try:
+        for event in pygame.event.get():
+            # Check for QUIT event
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if 245 <= mouse[0] <= 670 and 330 <= mouse[1] <= 330 + 20:
+                    if move_clock == True:
+                        move_clock = False
+
+        # update
+        mouse = pygame.mouse.get_pos()
+        screen.fill(background_colour)
+        pygame.draw.circle(screen,(0,0,0),(300,300), 300, 2)
+
+        # add numbers
+        for number_2 in range(1,13):
+            Print_Lage_Text("${:.2f}".format(number_2 * 8), Convert_Degrees(260, number_2 * 30))
+
+        # move clock
+        if move_clock == True:
+            # change prediction
+            if theta >= theta2:
+                new_location += random.uniform(theta2, 360 + theta)
+            if theta2 < new_location:
+                theta2 += 0.25
+            if theta2 > new_location:
+                theta2 -= 0.25
+
+            # price
+            current_price += 0.01
+
+        # go backwards
+        if move_clock == False:
+            # price
+            if current_price > default_time:
+                current_price -= 0.25
+            if theta2 > default_time:
+                theta2 -= 0.50
+            if current_price <= default_time and theta2 <= default_time:
+                time.sleep(1)
+                move_clock = True
+
+
+        # place bet
+        smallfont = pygame.font.SysFont('Times', 18)
+        text = smallfont.render('Place Bet'.upper(), True, (0,0,0))
+        pygame.draw.rect(screen, (0,255,0), [245, 330, 100, 30])
+        screen.blit(text, (247, 334))
+
+        # price line
+        R = 270
+        theta = current_price
+        pygame.draw.line(screen, (255, 0, 0), (300, 300), Convert_Degrees(R, theta), 7)
+
+        # prediction line
+        R2 = 270
+        pygame.draw.line(screen, (0, 0, 255), (300, 300), Convert_Degrees(R2, theta2), 7)
+
+        # price
+        if ((current_price - 16) / 3.2) > 0.00:
+            Print_Cost("${:.2f}".format((current_price - 16) / 3.2), (270, 300))
+        else:
+            Print_Cost("${:.2f}".format(0), (270, 300))
+        pygame.display.update()
+    except KeyboardInterrupt:
+        pass
