@@ -1,25 +1,29 @@
+# imports
 import random
 import time
 import pygame
 import math
 pygame.init()
 
+# pygame screen info
 screen = pygame.display.set_mode((600, 600))
 background_colour = (255,255,255)
 screen.fill(background_colour)
 pygame.display.flip()
 
+# print text around the clock
 def Print_Lage_Text(text, position):
     font = pygame.font.SysFont("Times", 20, True, False)
     surface = font.render(text, True, (0,0,0))
     screen.blit(surface, position)
 
+# convert the number into Degrees around the clock
 def Convert_Degrees(R, theta):
     y = math.cos(2 * math.pi * theta / 360) * R
     x = math.sin(2 * math.pi * theta / 360) * R
     return x + 300 - 20, -(y - 300) - 15
 
-
+# prints the total cost of the bet
 def Print_Cost(text, position):
     font = pygame.font.SysFont("Times", 22, True, False)
     surface = font.render(text, True, (0,0,0))
@@ -36,13 +40,16 @@ new_location = theta2
 
 move_clock = True
 
+# game loop
 running = True
 while running:
+    # stop an error from occurring when you close the window
     try:
         for event in pygame.event.get():
             # Check for QUIT event
             if event.type == pygame.QUIT:
                 running = False
+            # to activate the button
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if 245 <= mouse[0] <= 670 and 330 <= mouse[1] <= 330 + 20:
                     if move_clock == True:
@@ -70,7 +77,7 @@ while running:
             # price
             current_price += 0.01
 
-        # go backwards
+        # move the clock backwards
         if move_clock == False:
             # price
             if current_price > default_time:
