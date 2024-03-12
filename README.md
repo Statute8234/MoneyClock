@@ -1,4 +1,4 @@
-# Money_clock
+# MoneyClock
 
 The project simulates a stock market environment with users purchasing letters, using the pygame library to create a GUI. Users observe price fluctuations over time, adding new items and displaying them on a circular price chart.
 
