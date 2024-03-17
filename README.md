@@ -7,7 +7,7 @@ The project simulates a stock market environment with users purchasing letters, 
 - [About](#about)
 - [Features](#features)
 - [Imports](#Imports)
-- [Rating: 5/10](#Rating)
+- [Rating: 8/10](#Rating)
 
 # About
 
@@ -23,4 +23,5 @@ pygame, random, string, math, sys, time
 
 # Rating
 
-The project effectively depicts stock market dynamics through visuals and user interaction, but lacks depth in gameplay and features. The interface could be more intuitive, with tutorials or feedback systems for enhanced engagement. The simulation could benefit from more sophisticated algorithms for realistic price fluctuations. Despite its potential, further development is needed for a compelling simulation experience.
+The code is rated 8/10 for its functionality, organization, comments, user interaction, and dynamic content. It creates scrollable rectangles with dynamic content, generates random combinations of letters, and displays a rotating price line. The code is organized into classes and functions, making it easier to understand the purpose of each part. The code provides adequate comments throughout, allowing users to trigger actions like purchasing and scrolling. The code generates random combinations of letters and updates the content of the rectangles and the price line.
+However, there are areas for improvement. The use of global variables should be minimized to make the code easier to understand and maintain. Code readability should be improved by breaking longer sections into smaller functions with descriptive names. Error handling mechanisms should be implemented, especially in unexpected errors like file loading or user input. The UI design should be more visually appealing and organized, with better color schemes and layout designs. Performance optimization should be considered, especially when dealing with large entities or complex computations. Consistent naming conventions for variables, functions, and classes should be ensured to maintain clarity and readability. Refactoring could be done for better efficiency or to remove redundancy. Overall, the code demonstrates good functionality and organization, but improvements are needed to enhance readability, maintainability, and user experience.
